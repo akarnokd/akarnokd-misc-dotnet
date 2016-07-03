@@ -23,7 +23,7 @@ namespace akarnokd_misc_dotnet
 
         internal static IList<KeyValuePair<int, IList<string>>> Run()
         {
-            Func<int, int> scoreOfALetter = letter => letterScores[letter - 'A'];
+            Func<int, int> scoreOfALetter = letter => letterScores[letter - 'a'];
 
             Func<KeyValuePair<int, MutableInt>, int> letterScore = entry =>
                 letterScores[entry.Key - 'a']

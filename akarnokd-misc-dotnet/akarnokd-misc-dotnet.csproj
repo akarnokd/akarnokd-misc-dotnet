@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Reactor.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Reactor.Core.0.5.0\lib\Reactor.Core.dll</HintPath>
+      <HintPath>..\packages\Reactor.Core.0.5.2\lib\Reactor.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
