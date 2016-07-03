@@ -17,10 +17,13 @@ namespace akarnokd_misc_dotnet
 
             PrintResults(ShakespearePlaysScrabbleRxNET.Run());
 
-            
+            PrintResults(ShakespearePlaysScrabbleIxNET.Run());
+
             Console.WriteLine("Benchmarking...");
 
             Benchmark(5, () => ShakespearePlaysScrabbleRxNET.Run(), "ShakespearePlaysScrabbleRxNET");
+
+            Benchmark(5, () => ShakespearePlaysScrabbleIxNET.Run(), "ShakespearePlaysScrabbleIxNET");
 
             Benchmark(5, () => ShakespearePlaysScrabbleReactorCore.Run(), "ShakespearePlaysScrabbleReactorCore");
 
