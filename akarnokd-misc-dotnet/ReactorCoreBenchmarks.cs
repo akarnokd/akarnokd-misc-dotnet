@@ -29,8 +29,9 @@ namespace akarnokd_misc_dotnet
 
         internal static object RangePipeline(int c)
         {
+            // TODO SubscribeOn not implemented?!
             return Flux.Range(1, c)
-                .SubscribeOn(DefaultScheduler.Instance)
+                .PublishOn(DefaultScheduler.Instance)
                 .PublishOn(DefaultScheduler.Instance).BlockLast();
         }
 

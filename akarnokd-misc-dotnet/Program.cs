@@ -13,6 +13,8 @@ namespace akarnokd_misc_dotnet
         static void Main(string[] args)
         {
 
+            BenchmarkHeader();
+
             ReactorBenchmarks();
 
             RxBenchmarks();
@@ -21,36 +23,41 @@ namespace akarnokd_misc_dotnet
             Console.ReadLine();
         }
 
+        static void BenchmarkHeader()
+        {
+            Console.WriteLine("Benchmark (lib) (count) Mode Cnt Score Error Unit");
+        }
+
         static void ReactorBenchmarks()
         {
             int[] count = { 1, 10, 100, 1000, 10000, 100000, 1000000 };
 
             Benchmarking.Benchmark(5, c => ReactorCoreBenchmarks.Range(c), 
-                "ReactorCoreBenchmarks.Range", count);
+                "Range", "Reactor", count);
 
             Benchmarking.Benchmark(5, c => ReactorCoreBenchmarks.RangeAsync(c),
-                "ReactorCoreBenchmarks.RangeAsync", count);
+                "RangeAsync", "Reactor", count);
 
             Benchmarking.Benchmark(5, c => ReactorCoreBenchmarks.RangePipeline(c),
-                "ReactorCoreBenchmarks.RangePipeline", count);
+                "RangePipeline", "Reactor", count);
 
             Benchmarking.Benchmark(5, c => ReactorCoreBenchmarks.FlatMapJust(c),
-                "ReactorCoreBenchmarks.FlatMapJust", count);
+                "FlatMapJust", "Reactor", count);
 
             Benchmarking.Benchmark(5, c => ReactorCoreBenchmarks.FlatMapRange(c),
-                "ReactorCoreBenchmarks.FlatMapRange", count);
+                "FlatMapRange", "Reactor", count);
 
             Benchmarking.Benchmark(5, c => ReactorCoreBenchmarks.FlatMapXRange(c),
-                "ReactorCoreBenchmarks.FlatMapXRange", count);
+                "FlatMapXRange", "Reactor", count);
 
             Benchmarking.Benchmark(5, c => ReactorCoreBenchmarks.ConcatMapJust(c),
-                "ReactorCoreBenchmarks.ConcatMapJust", count);
+                "ConcatMapJust", "Reactor", count);
 
             Benchmarking.Benchmark(5, c => ReactorCoreBenchmarks.FlatMapRange(c),
-                "ReactorCoreBenchmarks.ConcatMapRange", count);
+                "ConcatMapRange", "Reactor", count);
 
             Benchmarking.Benchmark(5, c => ReactorCoreBenchmarks.FlatMapXRange(c),
-                "ReactorCoreBenchmarks.ConcatMapXRange", count);
+                "ConcatMapXRange", "Reactor", count);
 
         }
 
@@ -59,31 +66,31 @@ namespace akarnokd_misc_dotnet
             int[] count = { 1, 10, 100, 1000, 10000, 100000, 1000000 };
 
             Benchmarking.Benchmark(5, c => RxNETBenchmarks.Range(c),
-                "RxNETBenchmarks.Range", count);
+                "Range", "Rx.NET", count);
 
             Benchmarking.Benchmark(5, c => RxNETBenchmarks.RangeAsync(c),
-                "RxNETBenchmarks.RangeAsync", count);
+                "RangeAsync", "Rx.NET", count);
 
             Benchmarking.Benchmark(5, c => RxNETBenchmarks.RangePipeline(c),
-                "RxNETBenchmarks.RangePipeline", count);
+                "RangePipeline", "Rx.NET", count);
 
             Benchmarking.Benchmark(5, c => RxNETBenchmarks.FlatMapJust(c),
-                "RxNETBenchmarks.FlatMapJust", count);
+                "FlatMapJust", "Rx.NET", count);
 
             Benchmarking.Benchmark(5, c => RxNETBenchmarks.FlatMapRange(c),
-                "RxNETBenchmarks.FlatMapRange", count);
+                "FlatMapRange", "Rx.NET", count);
 
             Benchmarking.Benchmark(5, c => RxNETBenchmarks.FlatMapXRange(c),
-                "RxNETBenchmarks.FlatMapXRange", count);
+                "FlatMapXRange", "Rx.NET", count);
 
             Benchmarking.Benchmark(5, c => RxNETBenchmarks.ConcatMapJust(c),
-                "RxNETBenchmarks.ConcatMapJust", count);
+                "ConcatMapJust", "Rx.NET", count);
 
             Benchmarking.Benchmark(5, c => RxNETBenchmarks.FlatMapRange(c),
-                "RxNETBenchmarks.ConcatMapRange", count);
+                "ConcatMapRange", "Rx.NET", count);
 
             Benchmarking.Benchmark(5, c => RxNETBenchmarks.FlatMapXRange(c),
-                "RxNETBenchmarks.ConcatMapXRange", count);
+                "ConcatMapXRange", "Rx.NET", count);
 
         }
 

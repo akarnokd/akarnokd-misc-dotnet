@@ -20,37 +20,52 @@ namespace akarnokd_misc_dotnet
 
         internal static void Benchmark(int seconds, Func<object> action, string name)
         {
-            Console.Write(name);
-            Console.Write(": ");
-
-            var start = DateTimeOffset.UtcNow;
-            var end = start.AddSeconds(seconds);
-
-            long op = 0;
-
-            while (DateTimeOffset.UtcNow < end)
+            try
             {
-                Volatile.Write(ref field, action());
-                op++;
+                Console.Write(name);
+                Console.Write(": ");
+
+                var start = DateTimeOffset.UtcNow;
+                var end = start.AddSeconds(seconds);
+
+                long op = 0;
+
+                while (DateTimeOffset.UtcNow < end)
+                {
+                    Volatile.Write(ref field, action());
+                    op++;
+                }
+
+                var diff = (DateTimeOffset.UtcNow - start).TotalMilliseconds;
+
+                Console.Write("# = ");
+                Console.Write(op);
+                Console.Write(", Spd = ");
+                Console.Write(string.Format("{0:#.###}", diff / op));
+                Console.Write(" ms/op, ");
+                Console.Write(string.Format("{0:#.###}", op * 1000 / diff));
+                Console.WriteLine(" op/s");
             }
-
-            var diff = (DateTimeOffset.UtcNow - start).TotalMilliseconds;
-
-            Console.Write("Count = ");
-            Console.Write(op);
-            Console.Write(", Speed = ");
-            Console.Write(((long)(diff * 1000 / op) / 1000d));
-            Console.WriteLine(" ms/op");
+            catch (Exception ex)
+            {
+                Console.Write(name);
+                Console.Write(": ");
+                Console.WriteLine(ex.ToString());
+            }
         }
 
-        internal static void Benchmark(int seconds, Func<int, object> action, string name, params int[] count)
+        internal static void Benchmark(int seconds, Func<int, object> action, string name, string lib, params int[] count)
         {
             foreach (var c in count)
             {
                 Console.Write(name);
-                Console.Write("(");
-                Console.Write(c);
-                Console.Write("): ");
+                Console.Write(" ");
+                Console.Write(lib);
+                Console.Write(" ");
+                Console.Write(string.Format("{0,7}", c));
+                Console.Write(" thrpt ");
+                Console.Write(seconds);
+                Console.Write(" ");
 
                 var start = DateTimeOffset.UtcNow;
                 var end = start.AddSeconds(seconds);
@@ -67,18 +82,12 @@ namespace akarnokd_misc_dotnet
 
                     var diff = (DateTimeOffset.UtcNow - start).TotalMilliseconds;
 
-                    Console.Write("Count = ");
-                    Console.Write(op);
-                    Console.Write(", Speed = ");
-                    Console.Write(((long)(diff * 1000 / op) / 1000d));
-                    Console.WriteLine(" ms/op");
+                    // score
+                    Console.Write(string.Format("{0,13:#.000}", op * 1000 / diff));
+                    Console.WriteLine(" 0.000 op/s");
                 }
                 catch (Exception ex)
                 {
-                    Console.Write(name);
-                    Console.Write("(");
-                    Console.Write(c);
-                    Console.Write("): ");
                     Console.WriteLine(ex.ToString());
                 }
             }
