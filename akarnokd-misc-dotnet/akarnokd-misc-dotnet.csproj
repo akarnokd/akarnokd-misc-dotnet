@@ -75,6 +75,7 @@
     <Compile Include="Benchmarking.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RxNETBenchmarksFastRange.cs" />
     <Compile Include="RxNETBenchmarks.cs" />
     <Compile Include="ReactorCoreBenchmarks.cs" />
     <Compile Include="ShakespearePlaysScrabble.cs" />

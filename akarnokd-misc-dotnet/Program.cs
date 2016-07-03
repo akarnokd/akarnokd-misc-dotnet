@@ -19,6 +19,8 @@ namespace akarnokd_misc_dotnet
 
             RxBenchmarks();
 
+            RxFastRangeBenchmarks();
+
             Console.WriteLine("Done... Press ENTER to quit");
             Console.ReadLine();
         }
@@ -91,6 +93,39 @@ namespace akarnokd_misc_dotnet
 
             Benchmarking.Benchmark(5, c => RxNETBenchmarks.FlatMapXRange(c),
                 "ConcatMapXRange", "Rx.NET", count);
+
+        }
+
+        static void RxFastRangeBenchmarks()
+        {
+            int[] count = { 1, 10, 100, 1000, 10000, 100000, 1000000 };
+
+            Benchmarking.Benchmark(5, c => RxNETBenchmarksFastRange.Range(c),
+                "Range", "RxFr.NET", count);
+
+            Benchmarking.Benchmark(5, c => RxNETBenchmarksFastRange.RangeAsync(c),
+                "RangeAsync", "RxFr.NET", count);
+
+            Benchmarking.Benchmark(5, c => RxNETBenchmarksFastRange.RangePipeline(c),
+                "RangePipeline", "RxFr.NET", count);
+
+            Benchmarking.Benchmark(5, c => RxNETBenchmarksFastRange.FlatMapJust(c),
+                "FlatMapJust", "RxFr.NET", count);
+
+            Benchmarking.Benchmark(5, c => RxNETBenchmarksFastRange.FlatMapRange(c),
+                "FlatMapRange", "RxFr.NET", count);
+
+            Benchmarking.Benchmark(5, c => RxNETBenchmarksFastRange.FlatMapXRange(c),
+                "FlatMapXRange", "RxFr.NET", count);
+
+            Benchmarking.Benchmark(5, c => RxNETBenchmarksFastRange.ConcatMapJust(c),
+                "ConcatMapJust", "RxFr.NET", count);
+
+            Benchmarking.Benchmark(5, c => RxNETBenchmarksFastRange.FlatMapRange(c),
+                "ConcatMapRange", "RxFr.NET", count);
+
+            Benchmarking.Benchmark(5, c => RxNETBenchmarksFastRange.FlatMapXRange(c),
+                "ConcatMapXRange", "RxFr.NET", count);
 
         }
 
