@@ -12,25 +12,32 @@ namespace akarnokd_misc_dotnet
         static void Main(string[] args)
         {
             ShakespearePlaysScrabble.Init();
-            //Console.WriteLine(ShakespearePlaysScrabbleReactorCore.Run());
 
-            IList<KeyValuePair<int, IList<string>>> list = ShakespearePlaysScrabbleRxNET.Run();
+            //PrintResults(ShakespearePlaysScrabbleReactorCore.Run());
 
-            foreach (var kv in list)
-            {
-                Console.Write(kv.Key);
-                Console.Write(": ");
-                foreach (var e in kv.Value) {
-                    Console.Write(e);
-                    Console.Write(", ");
-                }
-                Console.WriteLine();
-            }
+            PrintResults(ShakespearePlaysScrabbleRxNET.Run());
+
+            
             Console.WriteLine("Benchmarking...");
 
             Benchmark(5, () => ShakespearePlaysScrabbleRxNET.Run(), "ShakespearePlaysScrabbleRxNET");
 
             Console.ReadLine();
+        }
+
+        static void PrintResults(IList<KeyValuePair<int, IList<string>>> list)
+        {
+            foreach (var kv in list)
+            {
+                Console.Write(kv.Key);
+                Console.Write(": ");
+                foreach (var e in kv.Value)
+                {
+                    Console.Write(e);
+                    Console.Write(", ");
+                }
+                Console.WriteLine();
+            }
         }
 
         static object field;
