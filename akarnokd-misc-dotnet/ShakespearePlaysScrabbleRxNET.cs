@@ -100,10 +100,8 @@ namespace akarnokd_misc_dotnet
 
             Func<string, IObservable<int>> score3 = word =>
                 Observable.Concat(
-                    score2(word),
-                    score2(word),
-                    bonusForDoubleLetter(word),
-                    bonusForDoubleLetter(word),
+                    score2(word).Select(v => v * 2),
+                    bonusForDoubleLetter(word).Select(v => v * 2),
                     Observable.Return(word.Length == 7 ? 50 : 0)
                 )
                 .Aggregate((a, b) => a + b);

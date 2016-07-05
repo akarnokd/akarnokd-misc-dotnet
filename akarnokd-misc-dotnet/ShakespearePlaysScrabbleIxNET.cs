@@ -151,10 +151,8 @@ namespace akarnokd_misc_dotnet
 
             Func<string, IEnumerable<int>> score3 = word =>
                 Concat(
-                    score2(word),
-                    score2(word),
-                    bonusForDoubleLetter(word),
-                    bonusForDoubleLetter(word),
+                    score2(word).Select(v => v * 2),
+                    bonusForDoubleLetter(word).Select(v => v * 2),
                     Return(word.Length == 7 ? 50 : 0)
                 )
                 .Reduce((a, b) => a + b);

@@ -15,11 +15,13 @@ namespace akarnokd_misc_dotnet
 
             BenchmarkHeader();
 
-            ReactorBenchmarks();
+            ScrabbleBenchmarks();
 
-            RxBenchmarks();
+            //ReactorBenchmarks();
 
-            RxFastRangeBenchmarks();
+            //RxBenchmarks();
+
+            //RxFastRangeBenchmarks();
 
             Console.WriteLine("Done... Press ENTER to quit");
             Console.ReadLine();

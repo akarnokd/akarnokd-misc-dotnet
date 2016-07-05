@@ -84,10 +84,8 @@ namespace akarnokd_misc_dotnet
 
             Func<string, IMono<int>> score3 = word =>
                 Flux.Concat(false,
-                    score2(word),
-                    score2(word),
-                    bonusForDoubleLetter(word),
-                    bonusForDoubleLetter(word),
+                    score2(word).Map(v => v * 2),
+                    bonusForDoubleLetter(word).Map(v => v * 2),
                     Flux.Just(word.Length == 7 ? 50 : 0)
                 )
                 .Reduce((a, b) => a + b);
