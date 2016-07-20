@@ -135,11 +135,17 @@ namespace akarnokd_misc_dotnet
         {
             ShakespearePlaysScrabble.Init();
 
+            Console.WriteLine("ShakespearePlaysScrabbleReactorCore");
             PrintResults(ShakespearePlaysScrabbleReactorCore.Run());
 
+            Console.WriteLine("ShakespearePlaysScrabbleRxNET");
             PrintResults(ShakespearePlaysScrabbleRxNET.Run());
 
+            Console.WriteLine("ShakespearePlaysScrabbleIxNET");
             PrintResults(ShakespearePlaysScrabbleIxNET.Run());
+
+            Console.WriteLine("ShakespearePlaysScrabbleOx");
+            PrintResults(ShakespearePlaysScrabbleOx.Run());
 
             Console.WriteLine("Benchmarking...");
 
@@ -148,6 +154,8 @@ namespace akarnokd_misc_dotnet
             Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleIxNET.Run(), "ShakespearePlaysScrabbleIxNET");
 
             Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleReactorCore.Run(), "ShakespearePlaysScrabbleReactorCore");
+
+            Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleOx.Run(), "ShakespearePlaysScrabbleOx");
         }
 
         static void PrintResults(IList<KeyValuePair<int, IList<string>>> list)

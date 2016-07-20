@@ -73,6 +73,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Benchmarking.cs" />
+    <Compile Include="observablex\BaseObserverX.cs" />
+    <Compile Include="observablex\BlockingObserverX.cs" />
+    <Compile Include="observablex\BooleanDisposable.cs" />
+    <Compile Include="observablex\IObservableX.cs" />
+    <Compile Include="observablex\Ox.cs" />
+    <Compile Include="observablex\OxConcat.cs" />
+    <Compile Include="observablex\OxFlattenEnumerable.cs" />
+    <Compile Include="observablex\OxFromEnumerable.cs" />
+    <Compile Include="observablex\OxFromString.cs" />
+    <Compile Include="observablex\OxHelper.cs" />
+    <Compile Include="observablex\OxFilter.cs" />
+    <Compile Include="observablex\OxJust.cs" />
+    <Compile Include="observablex\OxCollect.cs" />
+    <Compile Include="observablex\OxSkip.cs" />
+    <Compile Include="observablex\OxTake.cs" />
+    <Compile Include="observablex\OxReduce.cs" />
+    <Compile Include="observablex\OxMap.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RxNETBenchmarksFastRange.cs" />
@@ -80,6 +97,7 @@
     <Compile Include="ReactorCoreBenchmarks.cs" />
     <Compile Include="ShakespearePlaysScrabble.cs" />
     <Compile Include="ShakespearePlaysScrabbleIxNET.cs" />
+    <Compile Include="ShakespearePlaysScrabbleOx.cs" />
     <Compile Include="ShakespearePlaysScrabbleRxNET.cs" />
     <Compile Include="ShakespearePlaysScrabbleReactorCore.cs" />
   </ItemGroup>
