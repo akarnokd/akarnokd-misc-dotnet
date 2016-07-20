@@ -73,6 +73,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Benchmarking.cs" />
+    <Compile Include="ix\Ix.cs" />
+    <Compile Include="ix\IxCharacters.cs" />
+    <Compile Include="ix\IxJust.cs" />
     <Compile Include="observablex\BaseObserverX.cs" />
     <Compile Include="observablex\BlockingObserverX.cs" />
     <Compile Include="observablex\BooleanDisposable.cs" />
@@ -97,6 +100,7 @@
     <Compile Include="ReactorCoreBenchmarks.cs" />
     <Compile Include="ShakespearePlaysScrabble.cs" />
     <Compile Include="ShakespearePlaysScrabbleIxNET.cs" />
+    <Compile Include="ShakespearePlaysScrabbleIx.cs" />
     <Compile Include="ShakespearePlaysScrabbleOx.cs" />
     <Compile Include="ShakespearePlaysScrabbleRxNET.cs" />
     <Compile Include="ShakespearePlaysScrabbleReactorCore.cs" />
