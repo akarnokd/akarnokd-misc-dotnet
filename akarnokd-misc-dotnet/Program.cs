@@ -152,13 +152,13 @@ namespace akarnokd_misc_dotnet
 
             Console.WriteLine("Benchmarking...");
 
-            //Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleRxNET.Run(), "ShakespearePlaysScrabbleRxNET");
+            Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleRxNET.Run(), "ShakespearePlaysScrabbleRxNET");
 
-            //Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleIxNET.Run(), "ShakespearePlaysScrabbleIxNET");
+            Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleIxNET.Run(), "ShakespearePlaysScrabbleIxNET");
 
-            //Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleReactorCore.Run(), "ShakespearePlaysScrabbleReactorCore");
+            Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleReactorCore.Run(), "ShakespearePlaysScrabbleReactorCore");
 
-            //Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleOx.Run(), "ShakespearePlaysScrabbleOx");
+            Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleOx.Run(), "ShakespearePlaysScrabbleOx");
 
             Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleIx.Run(), "ShakespearePlaysScrabbleIx");
         }
