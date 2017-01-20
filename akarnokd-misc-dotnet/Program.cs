@@ -1,4 +1,5 @@
-﻿using System;
+﻿using akarnokd_misc_dotnet.schedulers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
@@ -13,6 +14,40 @@ namespace akarnokd_misc_dotnet
         static void Main(string[] args)
         {
 
+            var tw = new ThreadWorker();
+
+            for (int i = 0; i < 1000000; i++)
+            {
+                int j = i;
+                tw.Schedule(() => {
+                    if (j % 100000 == 0)
+                    {
+                        Console.WriteLine(j);
+                    }
+                });
+            }
+
+            Thread.Sleep(2000);
+
+            for (int i = 0; i < 1000000; i++)
+            {
+                int j = i;
+                tw.Schedule(() => {
+                    if (j % 100000 == 0)
+                    {
+                        Console.WriteLine(j);
+                    }
+                });
+            }
+
+            Thread.Sleep(2000);
+
+            Console.WriteLine("Done... Press ENTER to quit");
+            Console.ReadLine();
+        }
+
+        static void benchmarkHolder()
+        {
             BenchmarkHeader();
 
             ScrabbleBenchmarks();
@@ -23,8 +58,6 @@ namespace akarnokd_misc_dotnet
 
             //RxFastRangeBenchmarks();
 
-            Console.WriteLine("Done... Press ENTER to quit");
-            Console.ReadLine();
         }
 
         static void BenchmarkHeader()
