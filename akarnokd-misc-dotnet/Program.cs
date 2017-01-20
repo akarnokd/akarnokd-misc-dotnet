@@ -13,7 +13,31 @@ namespace akarnokd_misc_dotnet
     {
         static void Main(string[] args)
         {
+            string str = null;
 
+            for (int i = 1; i < 10; i++)
+            {
+                var q = new MpscLinkedArrayQueue<string>(i);
+
+                Console.WriteLine("Empty: " + q.IsEmpty());
+
+                for (int j = 0; j <= i; j++)
+                {
+                    q.Enqueue(j.ToString());
+                    Console.WriteLine("Enqueue: " + j + ", Empty: " + q.IsEmpty());
+                }
+
+                for (int j = 0; j <= i + 1; j++)
+                {
+                    Console.WriteLine("Dequeue: " + q.TryDequeue(out str) + " " + str + ", Empty: " + q.IsEmpty());
+                }
+            }
+            Console.WriteLine("Done... Press ENTER to quit");
+            Console.ReadLine();
+        }
+
+        static void threadWorkerTest()
+        {
             var tw = new ThreadWorker();
 
             for (int i = 0; i < 1000000; i++)
@@ -42,8 +66,6 @@ namespace akarnokd_misc_dotnet
 
             Thread.Sleep(2000);
 
-            Console.WriteLine("Done... Press ENTER to quit");
-            Console.ReadLine();
         }
 
         static void benchmarkHolder()

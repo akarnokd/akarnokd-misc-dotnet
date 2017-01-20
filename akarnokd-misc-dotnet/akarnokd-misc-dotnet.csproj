@@ -103,6 +103,7 @@
     <Compile Include="RxNETBenchmarksFastRange.cs" />
     <Compile Include="RxNETBenchmarks.cs" />
     <Compile Include="ReactorCoreBenchmarks.cs" />
+    <Compile Include="schedulers\MpscLinkedArrayQueue.cs" />
     <Compile Include="schedulers\ThreadWorker.cs" />
     <Compile Include="ShakespearePlaysScrabble.cs" />
     <Compile Include="ShakespearePlaysScrabbleIxNET.cs" />
