@@ -81,6 +81,7 @@
     <Compile Include="ix\Ix.cs" />
     <Compile Include="ix\IxCharacters.cs" />
     <Compile Include="ix\IxJust.cs" />
+    <Compile Include="linq\QueryableFlux.cs" />
     <Compile Include="observablex\BaseObserverX.cs" />
     <Compile Include="observablex\BlockingObserverX.cs" />
     <Compile Include="observablex\BooleanDisposable.cs" />

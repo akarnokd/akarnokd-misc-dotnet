@@ -13,6 +13,15 @@ namespace akarnokd_misc_dotnet
     {
         static void Main(string[] args)
         {
+            
+
+
+            Console.WriteLine("Done... Press ENTER to quit");
+            Console.ReadLine();
+        }
+
+        static void mpsclTest()
+        {
             string str = null;
 
             for (int i = 1; i < 10; i++)
@@ -32,8 +41,6 @@ namespace akarnokd_misc_dotnet
                     Console.WriteLine("Dequeue: " + q.TryDequeue(out str) + " " + str + ", Empty: " + q.IsEmpty());
                 }
             }
-            Console.WriteLine("Done... Press ENTER to quit");
-            Console.ReadLine();
         }
 
         static void threadWorkerTest()
