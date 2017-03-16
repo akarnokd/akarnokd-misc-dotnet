@@ -49,10 +49,9 @@ namespace akarnokd_misc_dotnet
 
             Func<string, IFlowable<long>> nBlanks = word =>
                 histoOfLetters(word)
-                .FlatMap(map => Flowable.FromEnumerable(map.AsEnumerable()))
+                .FlatMapEnumerable(map => map.AsEnumerable())
                 .Map(blank)
                 .Reduce((a, b) => a + b)
-                //.DoOnNext(Console.WriteLine).DoOnComplete(() => Console.WriteLine(word + "-done"))
                 ;
 
             Func<string, IFlowable<bool>> checkBlanks = word =>
@@ -60,7 +59,7 @@ namespace akarnokd_misc_dotnet
 
             Func<string, IFlowable<int>> score2 = word =>
                 histoOfLetters(word)
-                .FlatMap(map => Flowable.FromEnumerable(map.AsEnumerable()))
+                .FlatMapEnumerable(map => map.AsEnumerable())
                 .Map(letterScore)
                 .Reduce((a, b) => a + b);
 
@@ -118,7 +117,7 @@ namespace akarnokd_misc_dotnet
 
             IList<KeyValuePair<int, IList<string>>> finalList2;
                 buildHistoOnScore(score3)
-                .FlatMap(map => Flowable.FromEnumerable(map.AsEnumerable()))
+                .FlatMapEnumerable(map => map.AsEnumerable())
                 .Take(3)
                 .Collect(
                     () => new List<KeyValuePair<int, IList<string>>>(),

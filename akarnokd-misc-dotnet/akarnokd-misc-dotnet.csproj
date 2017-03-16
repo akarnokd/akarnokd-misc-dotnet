@@ -38,7 +38,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Reactive4.NET, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Reactive4.NET.0.1.0\lib\Reactive4.NET.dll</HintPath>
+      <HintPath>..\packages\Reactive4.NET.0.1.1\lib\Reactive4.NET.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Reactor.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
