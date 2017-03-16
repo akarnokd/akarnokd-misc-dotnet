@@ -13,8 +13,8 @@ namespace akarnokd_misc_dotnet
     {
         static void Main(string[] args)
         {
-            
 
+            ScrabbleBenchmarks();
 
             Console.WriteLine("Done... Press ENTER to quit");
             Console.ReadLine();
@@ -196,6 +196,9 @@ namespace akarnokd_misc_dotnet
         static void ScrabbleBenchmarks()
         {
             ShakespearePlaysScrabble.Init();
+
+            Console.WriteLine("ShakespearePlaysScrabbleReactive4NET");
+            PrintResults(ShakespearePlaysScrabbleReactive4NET.Run());
 
             Console.WriteLine("ShakespearePlaysScrabbleReactorCore");
             PrintResults(ShakespearePlaysScrabbleReactorCore.Run());

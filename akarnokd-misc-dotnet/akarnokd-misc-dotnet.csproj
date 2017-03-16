@@ -37,6 +37,10 @@
       <HintPath>..\packages\Reactive.Streams.1.0.0-RC1\lib\portable-net45+netcore45\Reactive.Streams.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Reactive4.NET, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Reactive4.NET.0.1.0\lib\Reactive4.NET.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Reactor.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Reactor.Core.0.6.2\lib\Reactor.Core.dll</HintPath>
       <Private>True</Private>
@@ -110,6 +114,7 @@
     <Compile Include="ShakespearePlaysScrabbleIxNET.cs" />
     <Compile Include="ShakespearePlaysScrabbleIx.cs" />
     <Compile Include="ShakespearePlaysScrabbleOx.cs" />
+    <Compile Include="ShakespearePlaysScrabbleReactive4NET.cs" />
     <Compile Include="ShakespearePlaysScrabbleRxNET.cs" />
     <Compile Include="ShakespearePlaysScrabbleReactorCore.cs" />
   </ItemGroup>
