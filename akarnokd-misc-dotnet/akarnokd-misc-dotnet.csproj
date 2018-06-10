@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="reactive-extensions, Version=0.0.23.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\akarnokd.reactive_extensions.0.0.23-alpha\lib\netstandard2.0\reactive-extensions.dll</HintPath>
+    </Reference>
     <Reference Include="Reactive.Streams, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Reactive.Streams.1.0.2\lib\net45\Reactive.Streams.dll</HintPath>
     </Reference>
@@ -51,7 +54,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Reactive, Version=4.1.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Reactive.4.1.0-preview.60\lib\net46\System.Reactive.dll</HintPath>
+      <HintPath>..\packages\System.Reactive.4.1.0-preview.61\lib\net46\System.Reactive.dll</HintPath>
     </Reference>
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
@@ -99,6 +102,7 @@
     <Compile Include="ShakespearePlaysScrabble.cs" />
     <Compile Include="ShakespearePlaysScrabbleIxNET.cs" />
     <Compile Include="ShakespearePlaysScrabbleIx.cs" />
+    <Compile Include="ShakespearePlaysScrabbleObservableSource.cs" />
     <Compile Include="ShakespearePlaysScrabbleOx.cs" />
     <Compile Include="ShakespearePlaysScrabbleReactive4NET.cs" />
     <Compile Include="ShakespearePlaysScrabbleRxNET.cs" />

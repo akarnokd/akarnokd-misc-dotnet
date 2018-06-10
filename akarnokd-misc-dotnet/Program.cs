@@ -215,6 +215,9 @@ namespace akarnokd_misc_dotnet
             Console.WriteLine("ShakespearePlaysScrabbleIx");
             PrintResults(ShakespearePlaysScrabbleIx.Run());
 
+            Console.WriteLine("ShakespearePlaysScrabbleObservableSource");
+            PrintResults(ShakespearePlaysScrabbleObservableSource.Run());
+
             Console.WriteLine("Benchmarking...");
 
 
@@ -227,6 +230,8 @@ namespace akarnokd_misc_dotnet
             Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleReactorCore.Run(), "ShakespearePlaysScrabbleReactorCore");
 
             Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleOx.Run(), "ShakespearePlaysScrabbleOx");
+
+            Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleObservableSource.Run(), "ShakespearePlaysScrabbleObservableSource");
 
             Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleIx.Run(), "ShakespearePlaysScrabbleIx");
         }
