@@ -103,6 +103,7 @@
     <Compile Include="ShakespearePlaysScrabbleIxNET.cs" />
     <Compile Include="ShakespearePlaysScrabbleIx.cs" />
     <Compile Include="ShakespearePlaysScrabbleObservableSource.cs" />
+    <Compile Include="ShakespearePlaysScrabbleForLoop.cs" />
     <Compile Include="ShakespearePlaysScrabbleOx.cs" />
     <Compile Include="ShakespearePlaysScrabbleReactive4NET.cs" />
     <Compile Include="ShakespearePlaysScrabbleRxNET.cs" />

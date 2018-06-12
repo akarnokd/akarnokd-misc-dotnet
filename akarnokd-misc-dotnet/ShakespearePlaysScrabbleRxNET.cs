@@ -11,12 +11,12 @@ using Reactor.Core.subscriber;
 using Reactor.Core.subscription;
 using Reactor.Core.util;
 using System.Reactive.Linq;
+using System.Reactive.Concurrency;
 
 namespace akarnokd_misc_dotnet
 {
     class ShakespearePlaysScrabbleRxNET : ShakespearePlaysScrabble
     {
-
 
         static IObservable<int> chars(string s)
         {
