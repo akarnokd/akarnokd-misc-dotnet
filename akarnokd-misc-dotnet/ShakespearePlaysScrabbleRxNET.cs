@@ -12,6 +12,7 @@ using Reactor.Core.subscription;
 using Reactor.Core.util;
 using System.Reactive.Linq;
 using System.Reactive.Concurrency;
+using akarnokd.reactive_extensions;
 
 namespace akarnokd_misc_dotnet
 {
@@ -20,6 +21,7 @@ namespace akarnokd_misc_dotnet
 
         static IObservable<int> chars(string s)
         {
+            /*
             return Observable.Create<int>(o =>
             {
                 for (int i = 0; i < s.Length; i++)
@@ -29,7 +31,40 @@ namespace akarnokd_misc_dotnet
                 o.OnCompleted();
                 return () => { };
             });
+            */
+            return new CharObservable(s);
         }
+
+        sealed class CharObservable : IObservable<int>
+        {
+            readonly string str;
+
+            public CharObservable(string str)
+            {
+                this.str = str;
+            }
+
+            public IDisposable Subscribe(IObserver<int> observer)
+            {
+                for (int i = 0; i < str.Length; i++)
+                {
+                    observer.OnNext((int)str[i]);
+                }
+                observer.OnCompleted();
+                return Empty;
+            }
+
+            static readonly IDisposable Empty = new EmptyDisposable();
+
+            sealed class EmptyDisposable : IDisposable
+            {
+                public void Dispose()
+                {
+                    // no op
+                }
+            }
+        }
+
 
         internal static IList<KeyValuePair<int, IList<string>>> Run()
         {
@@ -72,7 +107,7 @@ namespace akarnokd_misc_dotnet
                 histoOfLetters(word)
                 .SelectMany(map => map.AsEnumerable())
                 .Select(blank)
-                .Aggregate((a, b) => a + b)
+                .Sum()
                 ;
 
             Func<string, IObservable<bool>> checkBlanks = word =>
@@ -82,7 +117,7 @@ namespace akarnokd_misc_dotnet
                 histoOfLetters(word)
                 .SelectMany(map => map.AsEnumerable())
                 .Select(letterScore)
-                .Aggregate((a, b) => a + b);
+                .Sum();
 
             Func<string, IObservable<int>> first3 = word =>
                 chars(word).Take(3);
@@ -96,7 +131,7 @@ namespace akarnokd_misc_dotnet
             Func<string, IObservable<int>> bonusForDoubleLetter = word =>
                 toBeMaxed(word)
                 .Select(scoreOfALetter)
-                .Aggregate((a, b) => Math.Max(a, b));
+                .Max();
 
             Func<string, IObservable<int>> score3 = word =>
                 Observable.Concat(
@@ -104,13 +139,13 @@ namespace akarnokd_misc_dotnet
                     bonusForDoubleLetter(word).Select(v => v * 2),
                     Observable.Return(word.Length == 7 ? 50 : 0)
                 )
-                .Aggregate((a, b) => a + b);
+                .Sum();
 
             Func<Func<string, IObservable<int>>, IObservable<SortedDictionary<int, IList<string>>>> buildHistoOnScore = score =>
                 Observable.ToObservable(shakespeareWords.AsEnumerable())
                 .Where(word => scrabbleWords.Contains(word))
                 .Where(word => {
-                    return checkBlanks(word).ToEnumerable().First();
+                    return checkBlanks(word).FirstBlocking();
                 })
                 .Aggregate<string, SortedDictionary<int, IList<string>>>(
                     null,
@@ -120,7 +155,7 @@ namespace akarnokd_misc_dotnet
                             map = new SortedDictionary<int, IList<string>>(IntReverse);
                         }
 
-                        int key = score(word).ToEnumerable().First();
+                        int key = score(word).FirstBlocking();
                         IList<string> list;
                         if (!map.TryGetValue(key, out list))
                         {
@@ -149,9 +184,97 @@ namespace akarnokd_misc_dotnet
                         return list;
                     }
                 )
-                .ToEnumerable().First();
+                .FirstBlocking();
 
             return finalList2;
+        }
+    }
+
+    internal static class RxNET
+    {
+        internal static T FirstBlocking<T>(this IObservable<T> source)
+        {
+            var parent = new FirstBlockingObserver<T>();
+
+            /*
+            var d = CurrentThreadScheduler.Instance.Schedule((source, parent), (s, p) => p.source.Subscribe(p.parent));
+
+            parent.SetDisposable(d);
+            */
+
+            parent.SetDisposable(source.Subscribe(parent));
+
+            return parent.Get();
+        }
+
+        sealed class FirstBlockingObserver<T> : CountdownEvent, IObserver<T>
+        {
+            int once;
+
+            T value;
+            bool hasValue;
+            Exception error;
+
+            IDisposable upstream;
+
+            public FirstBlockingObserver() : base(1)
+            {
+
+            }
+
+            internal void SetDisposable(IDisposable d)
+            {
+                DisposableHelper.Replace(ref upstream, d);
+            }
+
+            void Unblock()
+            {
+                if (Interlocked.CompareExchange(ref once, 1, 0) == 0)
+                {
+                    Signal();
+                }
+            }
+
+            public void OnCompleted()
+            {
+                Unblock();
+            }
+
+            public void OnError(Exception error)
+            {
+                value = default(T);
+                this.error = error;
+            }
+
+            public void OnNext(T value)
+            {
+                if (!hasValue)
+                {
+                    DisposableHelper.Dispose(ref upstream);
+                    hasValue = true;
+                    this.value = value;
+                    Unblock();
+                }
+            }
+
+            internal T Get()
+            {
+                if (CurrentCount != 0)
+                {
+                    Wait();
+                }
+
+                var ex = error;
+                if (ex != null)
+                {
+                    throw ex;
+                }
+                if (hasValue)
+                {
+                    return value;
+                }
+                throw new IndexOutOfRangeException();
+            }
         }
     }
 }
