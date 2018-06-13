@@ -115,6 +115,7 @@
     <Compile Include="syncobservable\SyncObservable.cs" />
     <Compile Include="syncobservable\SyncObservableBlockingFirst.cs" />
     <Compile Include="syncobservable\SyncObservableCharacters.cs" />
+    <Compile Include="syncobservable\SyncObservableConcatWith.cs" />
     <Compile Include="syncobservable\SyncObservableConcat.cs" />
     <Compile Include="syncobservable\SyncObservableConcatMapEnumerable.cs" />
     <Compile Include="syncobservable\SyncObservableFilter.cs" />

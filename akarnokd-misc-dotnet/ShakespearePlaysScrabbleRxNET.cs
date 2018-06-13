@@ -51,20 +51,9 @@ namespace akarnokd_misc_dotnet
                     observer.OnNext((int)str[i]);
                 }
                 observer.OnCompleted();
-                return Empty;
-            }
-
-            static readonly IDisposable Empty = new EmptyDisposable();
-
-            sealed class EmptyDisposable : IDisposable
-            {
-                public void Dispose()
-                {
-                    // no op
-                }
+                return RxNET.Empty;
             }
         }
-
 
         internal static IList<KeyValuePair<int, IList<string>>> Run()
         {
@@ -78,7 +67,7 @@ namespace akarnokd_misc_dotnet
 
             Func<string, IObservable<Dictionary<int, MutableInt>>> histoOfLetters =
                 word => toIntegerFlux(word)
-                        .Aggregate<int, Dictionary<int, MutableInt>>(
+                        .Reduce<int, Dictionary<int, MutableInt>>(
                             null,
                             (m, value) =>
                             {
@@ -147,7 +136,7 @@ namespace akarnokd_misc_dotnet
                 .Where(word => {
                     return checkBlanks(word).FirstBlocking();
                 })
-                .Aggregate<string, SortedDictionary<int, IList<string>>>(
+                .Reduce<string, SortedDictionary<int, IList<string>>>(
                     null,
                     (map, word) => {
                         if (map == null)
@@ -172,7 +161,7 @@ namespace akarnokd_misc_dotnet
                 buildHistoOnScore(score3)
                 .SelectMany(map => map.AsEnumerable())
                 .Take(3)
-                .Aggregate< KeyValuePair<int, IList<string>>, List<KeyValuePair<int, IList<string>>>>(
+                .Reduce< KeyValuePair<int, IList<string>>, List<KeyValuePair<int, IList<string>>>>(
                     null,
                     (list, entry) =>
                     {
@@ -274,6 +263,113 @@ namespace akarnokd_misc_dotnet
                     return value;
                 }
                 throw new IndexOutOfRangeException();
+            }
+        }
+
+        internal static readonly IDisposable Empty = new EmptyDisposable();
+
+        sealed class EmptyDisposable : IDisposable
+        {
+            public void Dispose()
+            {
+                // no op
+            }
+        }
+
+        internal static IObservable<R> Reduce<T, R>(this IObservable<T> source, R initialValue, Func<R, T, R> reducer)
+        {
+            return new ObservableReduce<T, R>(source, initialValue, reducer);
+        }
+
+        sealed class ObservableReduce<T, R> : IObservable<R>
+        {
+            readonly IObservable<T> source;
+
+            readonly R initialValue;
+
+            readonly Func<R, T, R> reducer;
+
+            public ObservableReduce(IObservable<T> source, R initialValue, Func<R, T, R> reducer)
+            {
+                this.source = source;
+                this.initialValue = initialValue;
+                this.reducer = reducer;
+            }
+
+            public IDisposable Subscribe(IObserver<R> observer)
+            {
+                var parent = new ReduceObserver(observer, initialValue, reducer);
+                var d = source.Subscribe(parent);
+                parent.SetUpstream(d);
+                return parent;
+            }
+
+            sealed class ReduceObserver : IObserver<T>, IDisposable
+            {
+                readonly IObserver<R> downstream;
+
+                readonly Func<R, T, R> reducer;
+
+                R value;
+
+                IDisposable upstream;
+
+                bool done;
+
+                public ReduceObserver(IObserver<R> downstream, R value, Func<R, T, R> reducer)
+                {
+                    this.downstream = downstream;
+                    this.value = value;
+                    this.reducer = reducer;
+                }
+
+                public void Dispose()
+                {
+                    DisposableHelper.Dispose(ref upstream);
+                }
+
+                internal void SetUpstream(IDisposable d)
+                {
+                    DisposableHelper.Replace(ref upstream, d);
+                }
+
+                public void OnCompleted()
+                {
+                    if (done)
+                    {
+                        return;
+                    }
+                    downstream.OnNext(value);
+                    downstream.OnCompleted();
+                }
+
+                public void OnError(Exception error)
+                {
+                    if (done)
+                    {
+                        return;
+                    }
+                    value = default;
+                    downstream.OnError(error);
+                }
+
+                public void OnNext(T item)
+                {
+                    if (done)
+                    {
+                        return;
+                    }
+                    try
+                    {
+                        value = reducer(value, item);
+                    }
+                    catch (Exception ex)
+                    {
+                        Dispose();
+                        done = true;
+                        downstream.OnError(ex);
+                    }
+                }
             }
         }
     }

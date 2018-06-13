@@ -226,7 +226,6 @@ namespace akarnokd_misc_dotnet
 
             Console.WriteLine("Benchmarking...");
 
-
             Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleReactive4NET.Run(), "ShakespearePlaysScrabbleReactive4NET");
 
             Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleRxNET.Run(), "ShakespearePlaysScrabbleRxNET");
