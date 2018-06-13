@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using akarnokd_misc_dotnet.syncobservable;
-using Reactor.Core;
 
 
 namespace akarnokd_misc_dotnet
