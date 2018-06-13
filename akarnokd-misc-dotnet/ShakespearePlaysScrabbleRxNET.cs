@@ -13,6 +13,7 @@ using Reactor.Core.util;
 using System.Reactive.Linq;
 using System.Reactive.Concurrency;
 using akarnokd.reactive_extensions;
+using System.Reactive.Disposables;
 
 namespace akarnokd_misc_dotnet
 {
@@ -51,7 +52,7 @@ namespace akarnokd_misc_dotnet
                     observer.OnNext((int)str[i]);
                 }
                 observer.OnCompleted();
-                return RxNET.Empty;
+                return Disposable.Empty;
             }
         }
 
@@ -67,7 +68,7 @@ namespace akarnokd_misc_dotnet
 
             Func<string, IObservable<Dictionary<int, MutableInt>>> histoOfLetters =
                 word => toIntegerFlux(word)
-                        .Reduce<int, Dictionary<int, MutableInt>>(
+                        .Aggregate<int, Dictionary<int, MutableInt>>(
                             null,
                             (m, value) =>
                             {
@@ -130,13 +131,14 @@ namespace akarnokd_misc_dotnet
                 )
                 .Sum();
 
+#pragma warning disable CS0618 // Type or member is obsolete
             Func<Func<string, IObservable<int>>, IObservable<SortedDictionary<int, IList<string>>>> buildHistoOnScore = score =>
                 Observable.ToObservable(shakespeareWords.AsEnumerable())
                 .Where(word => scrabbleWords.Contains(word))
                 .Where(word => {
-                    return checkBlanks(word).FirstBlocking();
+                    return checkBlanks(word).First();
                 })
-                .Reduce<string, SortedDictionary<int, IList<string>>>(
+                .Aggregate<string, SortedDictionary<int, IList<string>>>(
                     null,
                     (map, word) => {
                         if (map == null)
@@ -144,7 +146,7 @@ namespace akarnokd_misc_dotnet
                             map = new SortedDictionary<int, IList<string>>(IntReverse);
                         }
 
-                        int key = score(word).FirstBlocking();
+                        int key = score(word).First();
                         IList<string> list;
                         if (!map.TryGetValue(key, out list))
                         {
@@ -161,7 +163,7 @@ namespace akarnokd_misc_dotnet
                 buildHistoOnScore(score3)
                 .SelectMany(map => map.AsEnumerable())
                 .Take(3)
-                .Reduce< KeyValuePair<int, IList<string>>, List<KeyValuePair<int, IList<string>>>>(
+                .Aggregate< KeyValuePair<int, IList<string>>, List<KeyValuePair<int, IList<string>>>>(
                     null,
                     (list, entry) =>
                     {
@@ -173,23 +175,18 @@ namespace akarnokd_misc_dotnet
                         return list;
                     }
                 )
-                .FirstBlocking();
+                .First();
+#pragma warning restore CS0618 // Type or member is obsolete
 
             return finalList2;
         }
     }
-
+    /*
     internal static class RxNET
     {
         internal static T FirstBlocking<T>(this IObservable<T> source)
         {
             var parent = new FirstBlockingObserver<T>();
-
-            /*
-            var d = CurrentThreadScheduler.Instance.Schedule((source, parent), (s, p) => p.source.Subscribe(p.parent));
-
-            parent.SetDisposable(d);
-            */
 
             parent.SetDisposable(source.Subscribe(parent));
 
@@ -373,4 +370,6 @@ namespace akarnokd_misc_dotnet
             }
         }
     }
+*/
+
 }
