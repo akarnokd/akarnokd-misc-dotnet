@@ -68,13 +68,13 @@ namespace akarnokd_misc_dotnet.syncobservable
                         {
                             var src = next;
                             next = null;
-                            source.Subscribe(this);
+                            src.Subscribe(this);
                         }
                         else
                         {
                             var src = source;
                             source = null;
-                            source.Subscribe(this);
+                            src.Subscribe(this);
                         }
 
                         if (--wip == 0)

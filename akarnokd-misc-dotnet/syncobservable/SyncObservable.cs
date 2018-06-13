@@ -70,6 +70,11 @@ namespace akarnokd_misc_dotnet.syncobservable
             return new SyncObservableConcat<T>(sources);
         }
 
+        public static ISyncObservable<T> Concat<T>(this ISyncObservable<T> first, ISyncObservable<T> second)
+        {
+            return new SyncObservableConcatWith<T>(first, second);
+        }
+
         public static ISyncObservable<R> ConcatMap<T, R>(this ISyncObservable<T> source, Func<T, IEnumerable<R>> mapper)
         {
             return new SyncObservableConcatMapEnumerable<T, R>(source, mapper);
