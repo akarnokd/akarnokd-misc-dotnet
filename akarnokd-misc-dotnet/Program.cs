@@ -221,6 +221,9 @@ namespace akarnokd_misc_dotnet
             Console.WriteLine("ShakespearePlaysScrabbleForLoop");
             PrintResults(ShakespearePlaysScrabbleForLoop.Run());
 
+            Console.WriteLine("ShakespearePlaysScrabbleSyncObservable");
+            PrintResults(ShakespearePlaysScrabbleSyncObservable.Run());
+
             Console.WriteLine("Benchmarking...");
 
 
@@ -239,6 +242,8 @@ namespace akarnokd_misc_dotnet
             Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleIx.Run(), "ShakespearePlaysScrabbleIx");
 
             Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleForLoop.Run(), "ShakespearePlaysScrabbleForLoop");
+
+            Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleSyncObservable.Run(), "ShakespearePlaysScrabbleSyncObservable");
         }
 
         static void PrintResults(IList<KeyValuePair<int, IList<string>>> list)

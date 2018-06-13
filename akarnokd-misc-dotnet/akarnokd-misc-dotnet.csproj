@@ -104,12 +104,27 @@
     <Compile Include="ShakespearePlaysScrabble.cs" />
     <Compile Include="ShakespearePlaysScrabbleIxNET.cs" />
     <Compile Include="ShakespearePlaysScrabbleIx.cs" />
+    <Compile Include="ShakespearePlaysScrabbleSyncObservable.cs" />
     <Compile Include="ShakespearePlaysScrabbleObservableSource.cs" />
     <Compile Include="ShakespearePlaysScrabbleForLoop.cs" />
     <Compile Include="ShakespearePlaysScrabbleOx.cs" />
     <Compile Include="ShakespearePlaysScrabbleReactive4NET.cs" />
     <Compile Include="ShakespearePlaysScrabbleRxNET.cs" />
     <Compile Include="ShakespearePlaysScrabbleReactorCore.cs" />
+    <Compile Include="syncobservable\BasicSyncDisposable.cs" />
+    <Compile Include="syncobservable\SyncObservable.cs" />
+    <Compile Include="syncobservable\SyncObservableBlockingFirst.cs" />
+    <Compile Include="syncobservable\SyncObservableCharacters.cs" />
+    <Compile Include="syncobservable\SyncObservableConcat.cs" />
+    <Compile Include="syncobservable\SyncObservableConcatMapEnumerable.cs" />
+    <Compile Include="syncobservable\SyncObservableFilter.cs" />
+    <Compile Include="syncobservable\SyncObservableFromEnumerable.cs" />
+    <Compile Include="syncobservable\SyncObservableJust.cs" />
+    <Compile Include="syncobservable\SyncObservableMap.cs" />
+    <Compile Include="syncobservable\SyncObservableCollect.cs" />
+    <Compile Include="syncobservable\SyncObservableReduce.cs" />
+    <Compile Include="syncobservable\SyncObservableSkip.cs" />
+    <Compile Include="syncobservable\SyncObservableTake.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
