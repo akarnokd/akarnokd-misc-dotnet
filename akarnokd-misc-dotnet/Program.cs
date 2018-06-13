@@ -6,6 +6,7 @@ using System.Reactive.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace akarnokd_misc_dotnet
 {
@@ -13,11 +14,23 @@ namespace akarnokd_misc_dotnet
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(Environment.Version);
+            Console.WriteLine(GetNetCoreVersion());
 
             ScrabbleBenchmarks();
 
             Console.WriteLine("Done... Press ENTER to quit");
             Console.ReadLine();
+        }
+
+        public static string GetNetCoreVersion()
+        {
+            var assembly = typeof(System.Runtime.GCSettings).GetTypeInfo().Assembly;
+            var assemblyPath = assembly.CodeBase.Split(new[] { '/', '\\' }, StringSplitOptions.RemoveEmptyEntries);
+            int netCoreAppIndex = Array.IndexOf(assemblyPath, "Microsoft.NETCore.App");
+            if (netCoreAppIndex > 0 && netCoreAppIndex < assemblyPath.Length - 2)
+                return assemblyPath[netCoreAppIndex + 1];
+            return null;
         }
 
         static void mpsclTest()

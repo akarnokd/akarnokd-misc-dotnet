@@ -22,22 +22,6 @@ namespace akarnokd_misc_dotnet
             return Ox.Characters(s);
         }
 
-        internal static readonly IntReverseComparer IntReverse = new IntReverseComparer();
-
-        internal sealed class IntReverseComparer : IComparer<int>
-        {
-
-            public int Compare(int x, int y)
-            {
-                return x < y ? 1 : (x > y ? -1 : 0);
-            }
-        }
-
-        internal sealed class MutableInt
-        {
-            internal int value;
-        }
-
         internal static IList<KeyValuePair<int, IList<string>>> Run()
         {
             SortedDictionary<int, IList<String>> treemap = new SortedDictionary<int, IList<String>>(IntReverse);
