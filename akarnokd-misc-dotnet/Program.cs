@@ -209,16 +209,16 @@ namespace akarnokd_misc_dotnet
         static void ScrabbleBenchmarks()
         {
             ShakespearePlaysScrabble.Init();
-
+            /*
             Console.WriteLine("ShakespearePlaysScrabbleReactive4NET");
             PrintResults(ShakespearePlaysScrabbleReactive4NET.Run());
 
             Console.WriteLine("ShakespearePlaysScrabbleReactorCore");
             PrintResults(ShakespearePlaysScrabbleReactorCore.Run());
-
+            */
             Console.WriteLine("ShakespearePlaysScrabbleRxNET");
             PrintResults(ShakespearePlaysScrabbleRxNET.Run());
-
+            /*
             Console.WriteLine("ShakespearePlaysScrabbleIxNET");
             PrintResults(ShakespearePlaysScrabbleIxNET.Run());
 
@@ -236,26 +236,32 @@ namespace akarnokd_misc_dotnet
 
             Console.WriteLine("ShakespearePlaysScrabbleSyncObservable");
             PrintResults(ShakespearePlaysScrabbleSyncObservable.Run());
+            */
+
+            Console.WriteLine("ShakespearePlaysScrabbleUniRx");
+            PrintResults(ShakespearePlaysScrabbleUniRx.Run());
 
             Console.WriteLine("Benchmarking...");
 
-            Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleReactive4NET.Run(), "ShakespearePlaysScrabbleReactive4NET");
+            //Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleReactive4NET.Run(), "ShakespearePlaysScrabbleReactive4NET");
 
             Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleRxNET.Run(), "ShakespearePlaysScrabbleRxNET");
 
-            Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleIxNET.Run(), "ShakespearePlaysScrabbleIxNET");
+            //Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleIxNET.Run(), "ShakespearePlaysScrabbleIxNET");
 
-            Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleReactorCore.Run(), "ShakespearePlaysScrabbleReactorCore");
+            //Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleReactorCore.Run(), "ShakespearePlaysScrabbleReactorCore");
 
-            Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleOx.Run(), "ShakespearePlaysScrabbleOx");
+            //Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleOx.Run(), "ShakespearePlaysScrabbleOx");
 
-            Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleObservableSource.Run(), "ShakespearePlaysScrabbleObservableSource");
+            //Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleObservableSource.Run(), "ShakespearePlaysScrabbleObservableSource");
 
-            Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleIx.Run(), "ShakespearePlaysScrabbleIx");
+            //Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleIx.Run(), "ShakespearePlaysScrabbleIx");
 
-            Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleForLoop.Run(), "ShakespearePlaysScrabbleForLoop");
+            //Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleForLoop.Run(), "ShakespearePlaysScrabbleForLoop");
 
-            Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleSyncObservable.Run(), "ShakespearePlaysScrabbleSyncObservable");
+            //Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleSyncObservable.Run(), "ShakespearePlaysScrabbleSyncObservable");
+
+            Benchmarking.Benchmark(5, () => ShakespearePlaysScrabbleUniRx.Run(), "ShakespearePlaysScrabbleUniRx");
         }
 
         static void PrintResults(IList<KeyValuePair<int, IList<string>>> list)
