@@ -31,7 +31,7 @@ namespace akarnokd_misc_dotnet
         static internal void Init()
         {
             Console.Write("Reading text files...");
-            using (StreamReader stream = new StreamReader("..\\..\\files\\ospd.txt"))
+            using (StreamReader stream = new StreamReader("..\\..\\..\\files\\ospd.txt"))
             {
                 string line;
 
@@ -41,7 +41,7 @@ namespace akarnokd_misc_dotnet
                 }
             }
 
-            using (StreamReader stream = new StreamReader("..\\..\\files\\words.shakespeare.txt"))
+            using (StreamReader stream = new StreamReader("..\\..\\..\\files\\words.shakespeare.txt"))
             {
                 string line;
 

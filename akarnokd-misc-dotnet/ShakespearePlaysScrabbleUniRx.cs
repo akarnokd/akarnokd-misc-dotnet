@@ -1,23 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Reactive.Streams;
-using System.Threading;
-using Reactor.Core.flow;
-using Reactor.Core.subscriber;
-using Reactor.Core.subscription;
-using Reactor.Core.util;
-using System.Reactive.Linq;
-using System.Reactive.Concurrency;
 using akarnokd.reactive_extensions;
-using System.Reactive.Disposables;
+using UniRx;
 
 namespace akarnokd_misc_dotnet
 {
-    class ShakespearePlaysScrabbleRxNET : ShakespearePlaysScrabble
+    class ShakespearePlaysScrabbleUniRx : ShakespearePlaysScrabble
     {
 
         static IObservable<int> chars(string s)
@@ -45,7 +33,7 @@ namespace akarnokd_misc_dotnet
                 this.str = str;
             }
 
-            public IDisposable Subscribe(IObserver<int> observer)
+            public System.IDisposable Subscribe(IObserver<int> observer)
             {
                 for (int i = 0; i < str.Length; i++)
                 {
@@ -58,15 +46,15 @@ namespace akarnokd_misc_dotnet
 
         internal static IList<KeyValuePair<int, IList<string>>> Run()
         {
-            Func<int, int> scoreOfALetter = letter => letterScores[letter - 'a'];
+            System.Func<int, int> scoreOfALetter = letter => letterScores[letter - 'a'];
 
-            Func<KeyValuePair<int, MutableInt>, int> letterScore = entry =>
+            System.Func<KeyValuePair<int, MutableInt>, int> letterScore = entry =>
                 letterScores[entry.Key - 'a']
-                * Math.Min(entry.Value.value, scrabbleAvailableLetters[entry.Key - 'a']);
+                * System.Math.Min(entry.Value.value, scrabbleAvailableLetters[entry.Key - 'a']);
 
-            Func<string, IObservable<int>> toIntegerFlux = str => chars(str);
+            System.Func<string, IObservable<int>> toIntegerFlux = str => chars(str);
 
-            Func<string, IObservable<Dictionary<int, MutableInt>>> histoOfLetters =
+            System.Func<string, IObservable<Dictionary<int, MutableInt>>> histoOfLetters =
                 word => toIntegerFlux(word)
                         .Aggregate<int, Dictionary<int, MutableInt>>(
                             null,
@@ -90,53 +78,56 @@ namespace akarnokd_misc_dotnet
                             }
                         );
 
-            Func<KeyValuePair<int, MutableInt>, long> blank = entry =>
-                Math.Max(0L, entry.Value.value - scrabbleAvailableLetters[entry.Key - 'a']);
+            System.Func<KeyValuePair<int, MutableInt>, long> blank = entry =>
+                System.Math.Max(0L, entry.Value.value - scrabbleAvailableLetters[entry.Key - 'a']);
 
-            Func<string, IObservable<long>> nBlanks = word =>
+            System.Func<string, IObservable<long>> nBlanks = word =>
                 histoOfLetters(word)
                 .SelectMany(map => map.AsEnumerable())
                 .Select(blank)
-                .Sum()
+                .Aggregate((a, b) => a + b)
                 ;
 
-            Func<string, IObservable<bool>> checkBlanks = word =>
+            System.Func<string, IObservable<bool>> checkBlanks = word =>
                 nBlanks(word).Select(v => v <= 2);
 
-            Func<string, IObservable<int>> score2 = word =>
+            System.Func<string, IObservable<int>> score2 = word =>
                 histoOfLetters(word)
                 .SelectMany(map => map.AsEnumerable())
                 .Select(letterScore)
-                .Sum();
+                .Aggregate((a, b) => a + b)
+                ;
 
-            Func<string, IObservable<int>> first3 = word =>
+            System.Func<string, IObservable<int>> first3 = word =>
                 chars(word).Take(3);
 
-            Func<string, IObservable<int>> last3 = word =>
+            System.Func<string, IObservable<int>> last3 = word =>
                 chars(word).Skip(3);
 
-            Func<string, IObservable<int>> toBeMaxed = word =>
+            System.Func<string, IObservable<int>> toBeMaxed = word =>
                 Observable.Concat(first3(word), last3(word));
 
-            Func<string, IObservable<int>> bonusForDoubleLetter = word =>
+            System.Func<string, IObservable<int>> bonusForDoubleLetter = word =>
                 toBeMaxed(word)
                 .Select(scoreOfALetter)
-                .Max();
+                .Aggregate((a, b) => System.Math.Max(a, b))
+                ;
 
-            Func<string, IObservable<int>> score3 = word =>
+            System.Func<string, IObservable<int>> score3 = word =>
                 Observable.Concat(
                     score2(word).Select(v => v * 2),
                     bonusForDoubleLetter(word).Select(v => v * 2),
                     Observable.Return(word.Length == 7 ? 50 : 0)
                 )
-                .Sum();
+                .Aggregate((a, b) => a + b)
+                ;
 
 #pragma warning disable CS0618 // Type or member is obsolete
-            Func<Func<string, IObservable<int>>, IObservable<SortedDictionary<int, IList<string>>>> buildHistoOnScore = score =>
+            System.Func<System.Func<string, IObservable<int>>, IObservable<SortedDictionary<int, IList<string>>>> buildHistoOnScore = score =>
                 Observable.ToObservable(shakespeareWords.AsEnumerable())
                 .Where(word => scrabbleWords.Contains(word))
                 .Where(word => {
-                    return checkBlanks(word).First();
+                    return checkBlanks(word).First().Wait();
                 })
                 .Aggregate<string, SortedDictionary<int, IList<string>>>(
                     null,
@@ -146,7 +137,7 @@ namespace akarnokd_misc_dotnet
                             map = new SortedDictionary<int, IList<string>>(IntReverse);
                         }
 
-                        int key = score(word).First();
+                        int key = score(word).First().Wait();
                         IList<string> list;
                         if (!map.TryGetValue(key, out list))
                         {
@@ -175,7 +166,7 @@ namespace akarnokd_misc_dotnet
                         return list;
                     }
                 )
-                .First();
+                .First().Wait();
 #pragma warning restore CS0618 // Type or member is obsolete
 
             return finalList2;
