@@ -8,10 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="akarnokd.reactive_extensions" Version="0.0.24-alpha" />
+    <PackageReference Include="akarnokd.reactive_extensions" Version="0.0.25-alpha" />
     <PackageReference Include="Reactive4.NET" Version="0.2.9" />
     <PackageReference Include="Reactor.Core" Version="0.6.2" />
-    <PackageReference Include="System.Reactive" Version="4.1.0-preview.75" />
+    <PackageReference Include="System.Reactive" Version="4.1.0-preview.108" />
     <PackageReference Include="UniRx" Version="5.4.1" />
   </ItemGroup>
 
