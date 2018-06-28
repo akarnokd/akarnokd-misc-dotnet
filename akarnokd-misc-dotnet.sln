@@ -1,11 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "akarnokd-misc-dotnet", "akarnokd-misc-dotnet\akarnokd-misc-dotnet.csproj", "{B7A1AB9C-A623-48B5-85FA-0509BB4EABA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "akarnokd-misc-dotnet", "akarnokd-misc-dotnet\akarnokd-misc-dotnet.csproj", "{B7A1AB9C-A623-48B5-85FA-0509BB4EABA9}"
 EndProject
 Global
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -18,5 +21,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2741A603-5C9E-4792-BA59-662DC07AAF9B}
 	EndGlobalSection
 EndGlobal
