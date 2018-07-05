@@ -17,7 +17,7 @@ namespace akarnokd_misc_dotnet
 {
 
     [MemoryDiagnoser]
-    class ShakespearePlaysScrabbleIxNET : ShakespearePlaysScrabble
+    public class ShakespearePlaysScrabbleIxNET : ShakespearePlaysScrabble
     {
         [Benchmark]
         public object IxNET()

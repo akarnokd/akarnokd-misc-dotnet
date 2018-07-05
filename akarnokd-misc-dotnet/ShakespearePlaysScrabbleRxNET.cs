@@ -19,7 +19,7 @@ using BenchmarkDotNet.Attributes;
 namespace akarnokd_misc_dotnet
 {
     [MemoryDiagnoser]
-    class ShakespearePlaysScrabbleRxNET : ShakespearePlaysScrabble
+    public class ShakespearePlaysScrabbleRxNET : ShakespearePlaysScrabble
     {
         [Benchmark]
         public object RxNET()

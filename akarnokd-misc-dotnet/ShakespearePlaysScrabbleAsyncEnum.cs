@@ -10,7 +10,7 @@ using BenchmarkDotNet.Attributes;
 namespace akarnokd_misc_dotnet
 {
     [MemoryDiagnoser]
-    class ShakespearePlaysScrabbleAsyncEnum : ShakespearePlaysScrabble
+    public class ShakespearePlaysScrabbleAsyncEnum : ShakespearePlaysScrabble
     {
         [Benchmark]
         public object AsyncEnum()

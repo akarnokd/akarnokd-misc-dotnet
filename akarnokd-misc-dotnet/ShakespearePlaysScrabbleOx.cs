@@ -17,7 +17,7 @@ using BenchmarkDotNet.Attributes;
 namespace akarnokd_misc_dotnet
 {
     [MemoryDiagnoser]
-    class ShakespearePlaysScrabbleOx : ShakespearePlaysScrabble
+    public class ShakespearePlaysScrabbleOx : ShakespearePlaysScrabble
     {
         [Benchmark]
         public object ObservableX()

@@ -7,7 +7,7 @@ using UniRx;
 namespace akarnokd_misc_dotnet
 {
     [MemoryDiagnoser]
-    class ShakespearePlaysScrabbleUniRx : ShakespearePlaysScrabble
+    public class ShakespearePlaysScrabbleUniRx : ShakespearePlaysScrabble
     {
         [Benchmark]
         public object UniRx()

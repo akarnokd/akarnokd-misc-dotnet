@@ -10,7 +10,7 @@ using Reactive4.NET;
 namespace akarnokd_misc_dotnet
 {
     [MemoryDiagnoser]
-    class ShakespearePlaysScrabbleReactive4NET : ShakespearePlaysScrabble
+    public class ShakespearePlaysScrabbleReactive4NET : ShakespearePlaysScrabble
     {
         [Benchmark]
         public object Reactive4NET()

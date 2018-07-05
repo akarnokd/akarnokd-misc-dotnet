@@ -16,7 +16,7 @@ using BenchmarkDotNet.Attributes;
 namespace akarnokd_misc_dotnet
 {
     [MemoryDiagnoser]
-    class ShakespearePlaysScrabbleReactorCore : ShakespearePlaysScrabble
+    public class ShakespearePlaysScrabbleReactorCore : ShakespearePlaysScrabble
     {
         [Benchmark]
         public object ReactorCore()

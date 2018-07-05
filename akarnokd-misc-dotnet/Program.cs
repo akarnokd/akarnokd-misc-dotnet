@@ -18,17 +18,8 @@ namespace akarnokd_misc_dotnet
             Console.WriteLine(Environment.Version);
             Console.WriteLine(GetNetCoreVersion());
 
-            BenchmarkRunner.Run<ShakespearePlaysScrabbleAsyncEnum>();
-            BenchmarkRunner.Run<ShakespearePlaysScrabbleForLoop>();
-            BenchmarkRunner.Run<ShakespearePlaysScrabbleIx>();
-            BenchmarkRunner.Run<ShakespearePlaysScrabbleIxNET>();
-            BenchmarkRunner.Run<ShakespearePlaysScrabbleObservableSource>();
-            BenchmarkRunner.Run<ShakespearePlaysScrabbleOx>();
-            BenchmarkRunner.Run<ShakespearePlaysScrabbleReactive4NET>();
-            BenchmarkRunner.Run<ShakespearePlaysScrabbleReactorCore>();
-            BenchmarkRunner.Run<ShakespearePlaysScrabbleRxNET>();
-            BenchmarkRunner.Run<ShakespearePlaysScrabbleSyncObservable>();
-            BenchmarkRunner.Run<ShakespearePlaysScrabbleUniRx>();
+            BenchmarkRunner.Run<ShakespearePlaysScrabbleAllBenchmarks>();
+            
 
             /*
             ScrabbleBenchmarks();

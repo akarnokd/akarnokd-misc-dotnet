@@ -17,7 +17,7 @@ using BenchmarkDotNet.Attributes;
 namespace akarnokd_misc_dotnet
 {
     [MemoryDiagnoser]
-    class ShakespearePlaysScrabbleForLoop : ShakespearePlaysScrabble
+    public class ShakespearePlaysScrabbleForLoop : ShakespearePlaysScrabble
     {
         [Benchmark]
         public object ForLoops()

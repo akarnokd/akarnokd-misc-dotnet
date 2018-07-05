@@ -12,10 +12,11 @@ using Reactor.Core.subscriber;
 using Reactor.Core.subscription;
 using Reactor.Core.util;
 using System.IO;
+using BenchmarkDotNet.Attributes;
 
 namespace akarnokd_misc_dotnet
 {
-    internal class ShakespearePlaysScrabble
+    public class ShakespearePlaysScrabble
     {
         static internal readonly int[] letterScores = {
     // a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p,  q, r, s, t, u, v, w, x, y,  z
@@ -27,6 +28,12 @@ namespace akarnokd_misc_dotnet
 
         static internal readonly HashSet<string> scrabbleWords = new HashSet<string>();
         static internal readonly HashSet<string> shakespeareWords = new HashSet<string>();
+
+        [GlobalSetup]
+        public void Setup()
+        {
+            Init();
+        }
 
         static internal void Init()
         {
