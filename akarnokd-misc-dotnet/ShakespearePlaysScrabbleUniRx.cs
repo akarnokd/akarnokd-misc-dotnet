@@ -1,26 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using akarnokd.reactive_extensions;
+using BenchmarkDotNet.Attributes;
 using UniRx;
 
 namespace akarnokd_misc_dotnet
 {
+    [MemoryDiagnoser]
     class ShakespearePlaysScrabbleUniRx : ShakespearePlaysScrabble
     {
+        [Benchmark]
+        public object UniRx()
+        {
+            return Run();
+        }
 
         static IObservable<int> chars(string s)
         {
-            /*
-            return Observable.Create<int>(o =>
-            {
-                for (int i = 0; i < s.Length; i++)
-                {
-                    o.OnNext(s[i]);
-                }
-                o.OnCompleted();
-                return () => { };
-            });
-            */
             return new CharObservable(s);
         }
 

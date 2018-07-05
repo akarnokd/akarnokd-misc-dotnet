@@ -6,11 +6,19 @@ using System.Threading.Tasks;
 
 using Reactor.Core;
 using akarnokd.reactive_extensions;
+using BenchmarkDotNet.Attributes;
 
 namespace akarnokd_misc_dotnet
 {
+    [MemoryDiagnoser]
     class ShakespearePlaysScrabbleObservableSource : ShakespearePlaysScrabble
     {
+        [Benchmark]
+        public object ObservableSrc()
+        {
+            return Run();
+        }
+
         static IObservableSource<int> chars(string s)
         {
             return ObservableSource.Range(0, s.Length).Map(i => (int)s[i]);

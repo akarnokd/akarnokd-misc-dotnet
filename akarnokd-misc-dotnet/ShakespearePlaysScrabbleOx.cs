@@ -12,11 +12,19 @@ using Reactor.Core.subscriber;
 using Reactor.Core.subscription;
 using Reactor.Core.util;
 using akarnokd_misc_dotnet.observablex;
+using BenchmarkDotNet.Attributes;
 
 namespace akarnokd_misc_dotnet
 {
+    [MemoryDiagnoser]
     class ShakespearePlaysScrabbleOx : ShakespearePlaysScrabble
     {
+        [Benchmark]
+        public object ObservableX()
+        {
+            return Run();
+        }
+
         static IObservableX<int> chars(string s)
         {
             return Ox.Characters(s);

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Reflection;
+using BenchmarkDotNet.Running;
 
 namespace akarnokd_misc_dotnet
 {
@@ -17,10 +18,24 @@ namespace akarnokd_misc_dotnet
             Console.WriteLine(Environment.Version);
             Console.WriteLine(GetNetCoreVersion());
 
+            BenchmarkRunner.Run<ShakespearePlaysScrabbleAsyncEnum>();
+            BenchmarkRunner.Run<ShakespearePlaysScrabbleForLoop>();
+            BenchmarkRunner.Run<ShakespearePlaysScrabbleIx>();
+            BenchmarkRunner.Run<ShakespearePlaysScrabbleIxNET>();
+            BenchmarkRunner.Run<ShakespearePlaysScrabbleObservableSource>();
+            BenchmarkRunner.Run<ShakespearePlaysScrabbleOx>();
+            BenchmarkRunner.Run<ShakespearePlaysScrabbleReactive4NET>();
+            BenchmarkRunner.Run<ShakespearePlaysScrabbleReactorCore>();
+            BenchmarkRunner.Run<ShakespearePlaysScrabbleRxNET>();
+            BenchmarkRunner.Run<ShakespearePlaysScrabbleSyncObservable>();
+            BenchmarkRunner.Run<ShakespearePlaysScrabbleUniRx>();
+
+            /*
             ScrabbleBenchmarks();
 
             Console.WriteLine("Done... Press ENTER to quit");
             Console.ReadLine();
+            */
         }
 
         public static string GetNetCoreVersion()

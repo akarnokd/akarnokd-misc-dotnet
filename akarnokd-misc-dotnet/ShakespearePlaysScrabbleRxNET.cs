@@ -14,11 +14,18 @@ using System.Reactive.Linq;
 using System.Reactive.Concurrency;
 using akarnokd.reactive_extensions;
 using System.Reactive.Disposables;
+using BenchmarkDotNet.Attributes;
 
 namespace akarnokd_misc_dotnet
 {
+    [MemoryDiagnoser]
     class ShakespearePlaysScrabbleRxNET : ShakespearePlaysScrabble
     {
+        [Benchmark]
+        public object RxNET()
+        {
+            return Run();
+        }
 
         static IObservable<int> chars(string s)
         {

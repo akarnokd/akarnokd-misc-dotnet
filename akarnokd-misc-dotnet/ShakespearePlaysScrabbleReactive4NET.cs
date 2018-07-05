@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using BenchmarkDotNet.Attributes;
 using Reactive.Streams;
 using Reactive4.NET;
 
 namespace akarnokd_misc_dotnet
 {
+    [MemoryDiagnoser]
     class ShakespearePlaysScrabbleReactive4NET : ShakespearePlaysScrabble
     {
+        [Benchmark]
+        public object Reactive4NET()
+        {
+            return Run();
+        }
+
         static IFlowable<int> chars(string s)
         {
             return Flowable.Range(0, s.Length).Map(i => (int)s[i]);

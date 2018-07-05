@@ -11,11 +11,19 @@ using Reactor.Core.flow;
 using Reactor.Core.subscriber;
 using Reactor.Core.subscription;
 using Reactor.Core.util;
+using BenchmarkDotNet.Attributes;
 
 namespace akarnokd_misc_dotnet
 {
+    [MemoryDiagnoser]
     class ShakespearePlaysScrabbleReactorCore : ShakespearePlaysScrabble
     {
+        [Benchmark]
+        public object ReactorCore()
+        {
+            return Run();
+        }
+
         static IFlux<int> chars(string s)
         {
             return Flux.Range(0, s.Length).Map(i => (int)s[i]);

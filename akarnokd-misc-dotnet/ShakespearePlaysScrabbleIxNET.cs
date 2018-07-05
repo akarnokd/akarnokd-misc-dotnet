@@ -11,53 +11,19 @@ using Reactor.Core.subscriber;
 using Reactor.Core.subscription;
 using Reactor.Core.util;
 using System.Linq.Expressions;
+using BenchmarkDotNet.Attributes;
 
 namespace akarnokd_misc_dotnet
 {
 
-    public static class Ixx
-    {
-        public static IEnumerable<T> Reduce<T>(this IEnumerable<T> source, Func<T, T, T> aggregator)
-        {
-            T accumulator = default(T);
-
-            bool first = true;
-
-            foreach (var e in source)
-            {
-                if (first)
-                {
-                    accumulator = e;
-                    first = false;
-                }
-                else
-                {
-                    accumulator = aggregator(accumulator, e);
-                }
-            }
-
-            if (first)
-            {
-                yield break;
-            }
-            yield return accumulator;
-        }
-
-        public static IEnumerable<A> Reduce<T, A>(this IEnumerable<T> source, A initial, Func<A, T, A> aggregator)
-        {
-            A value = initial;
-
-            foreach (var e in source)
-            {
-                value = aggregator(value, e);
-            }
-            yield return value;
-        }
-    }
-
+    [MemoryDiagnoser]
     class ShakespearePlaysScrabbleIxNET : ShakespearePlaysScrabble
     {
-
+        [Benchmark]
+        public object IxNET()
+        {
+            return Run();
+        }
 
         static IEnumerable<int> chars(string s)
         {
@@ -203,6 +169,46 @@ namespace akarnokd_misc_dotnet
                 .First();
 
             return finalList2;
+        }
+    }
+
+    public static class Ixx
+    {
+        public static IEnumerable<T> Reduce<T>(this IEnumerable<T> source, Func<T, T, T> aggregator)
+        {
+            T accumulator = default(T);
+
+            bool first = true;
+
+            foreach (var e in source)
+            {
+                if (first)
+                {
+                    accumulator = e;
+                    first = false;
+                }
+                else
+                {
+                    accumulator = aggregator(accumulator, e);
+                }
+            }
+
+            if (first)
+            {
+                yield break;
+            }
+            yield return accumulator;
+        }
+
+        public static IEnumerable<A> Reduce<T, A>(this IEnumerable<T> source, A initial, Func<A, T, A> aggregator)
+        {
+            A value = initial;
+
+            foreach (var e in source)
+            {
+                value = aggregator(value, e);
+            }
+            yield return value;
         }
     }
 }

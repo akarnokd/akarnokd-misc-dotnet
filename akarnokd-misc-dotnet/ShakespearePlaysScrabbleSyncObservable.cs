@@ -2,12 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using akarnokd_misc_dotnet.syncobservable;
-
+using BenchmarkDotNet.Attributes;
 
 namespace akarnokd_misc_dotnet
 {
+    [MemoryDiagnoser]
     class ShakespearePlaysScrabbleSyncObservable : ShakespearePlaysScrabble
     {
+        [Benchmark]
+        public object ObservableSync()
+        {
+            return Run();
+        }
+
         static ISyncObservable<int> chars(string s)
         {
             return SyncObservable.Characters(s);

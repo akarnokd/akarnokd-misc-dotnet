@@ -4,11 +4,19 @@ using System.Collections.Generic;
 
 using Reactor.Core;
 using akarnokd_misc_dotnet.ix;
+using BenchmarkDotNet.Attributes;
 
 namespace akarnokd_misc_dotnet
 {
+    [MemoryDiagnoser]
     class ShakespearePlaysScrabbleIx : ShakespearePlaysScrabble
     {
+        [Benchmark]
+        public object Ixx()
+        {
+            return Run();
+        }
+
         static IEnumerable<int> chars(string s)
         {
             return Ix.Characters(s);

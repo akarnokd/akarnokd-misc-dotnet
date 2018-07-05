@@ -46,6 +46,7 @@ namespace akarnokd_misc_dotnet
             return new RangeObservable(start, count);
         }
 
+#pragma warning disable CS0618 // Type or member is obsolete
         internal static object Range(int c)
         {
             return Range(1, c).Last();
@@ -94,5 +95,6 @@ namespace akarnokd_misc_dotnet
             int d = 1000000 / c;
             return Observable.Concat(Range(1, c).Select(v => Range(v, d))).Last();
         }
+#pragma warning restore CS0618 // Type or member is obsolete
     }
 }

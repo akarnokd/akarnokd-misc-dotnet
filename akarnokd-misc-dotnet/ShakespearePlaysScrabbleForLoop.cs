@@ -12,14 +12,17 @@ using Reactor.Core.subscriber;
 using Reactor.Core.subscription;
 using Reactor.Core.util;
 using akarnokd_misc_dotnet.observablex;
+using BenchmarkDotNet.Attributes;
 
 namespace akarnokd_misc_dotnet
 {
+    [MemoryDiagnoser]
     class ShakespearePlaysScrabbleForLoop : ShakespearePlaysScrabble
     {
-        static IObservableX<int> chars(string s)
+        [Benchmark]
+        public object ForLoops()
         {
-            return Ox.Characters(s);
+            return Run();
         }
 
         internal static IList<KeyValuePair<int, IList<string>>> Run()

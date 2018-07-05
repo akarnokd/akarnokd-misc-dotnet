@@ -5,11 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 
 using akarnokd.reactive_extensions;
+using BenchmarkDotNet.Attributes;
 
 namespace akarnokd_misc_dotnet
 {
+    [MemoryDiagnoser]
     class ShakespearePlaysScrabbleAsyncEnum : ShakespearePlaysScrabble
     {
+        [Benchmark]
+        public object AsyncEnum()
+        {
+            return Run();
+        }
+
         static IAsyncEnumerable<int> chars(string s)
         {
             return AsyncEnumerable.Range(0, s.Length).Map(i => (int)s[i]);
