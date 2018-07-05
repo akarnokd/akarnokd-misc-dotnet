@@ -18,9 +18,9 @@ namespace akarnokd_misc_dotnet
             Console.WriteLine(Environment.Version);
             Console.WriteLine(GetNetCoreVersion());
 
-            BenchmarkRunner.Run<ShakespearePlaysScrabbleAllBenchmarks>();
-            
+            //BenchmarkRunner.Run<ShakespearePlaysScrabbleAllBenchmarks>();
 
+            BenchmarkRunner.Run<ShakespearePlaysScrabbleRxNET>();
             /*
             ScrabbleBenchmarks();
 

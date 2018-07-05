@@ -37,8 +37,11 @@ namespace akarnokd_misc_dotnet
 
         static internal void Init()
         {
-            Console.Write("Reading text files...");
-            using (StreamReader stream = new StreamReader("..\\..\\..\\files\\ospd.txt"))
+            Console.Write("// Reading text files...");
+            var dir = Directory.GetCurrentDirectory();
+            var idx = dir.IndexOf("akarnokd-misc-dotnet");
+            var path = dir.Substring(0, idx) + "akarnokd-misc-dotnet\\akarnokd-misc-dotnet\\";
+            using (StreamReader stream = new StreamReader(path + "files\\ospd.txt"))
             {
                 string line;
 
@@ -48,7 +51,7 @@ namespace akarnokd_misc_dotnet
                 }
             }
 
-            using (StreamReader stream = new StreamReader("..\\..\\..\\files\\words.shakespeare.txt"))
+            using (StreamReader stream = new StreamReader(path + "files\\words.shakespeare.txt"))
             {
                 string line;
 
@@ -57,7 +60,7 @@ namespace akarnokd_misc_dotnet
                     shakespeareWords.Add(line.ToLowerInvariant());
                 }
             }
-            Console.WriteLine(" Done!");
+            Console.WriteLine("// Done!");
         }
 
         internal sealed class MutableInt
