@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="akarnokd.async-enumerable-dotnet" Version="0.0.1.1" />
     <PackageReference Include="BenchmarkDotNet" Version="0.11.1" />
+    <PackageReference Include="Quinmars.AsyncObservable" Version="0.0.4" />
   </ItemGroup>
 
 </Project>
