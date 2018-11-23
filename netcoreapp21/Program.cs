@@ -12,6 +12,7 @@ namespace akarnokd_misc_dotnet
             Console.WriteLine(GetNetCoreVersion());
 
             BenchmarkRunner.Run<ShakespearePlaysScrabbleAsyncEnumerableDotNet>();
+            BenchmarkRunner.Run<ShakespearePlaysScrabbleAsyncObservable>();
 
             //BenchmarkRunner.Run<ShakespearePlaysScrabbleRxNET>();
             /*
